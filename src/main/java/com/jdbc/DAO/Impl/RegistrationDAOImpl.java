@@ -92,26 +92,57 @@ public class RegistrationDAOImpl implements RegistrationRepo {
 
 	@Override
 	public Registration findByEmailAndPhoneNumber(String email, long phoneNumber) {
-		// TODO Auto-generated method stub
+
+		try (Connection connection = PostgresSQLConnection.getConnection()){
+			String sql = "select FROM techbee.registration WHERE email = ? AND phone_number = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return null;
+		
 	}
 
 	@Override
-	public Registration updateById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public int updatePhoneNumberById(int id, long phoneNumber) throws Exception {
+		int result = 0;
+		
+		try (Connection connection = PostgresSQLConnection.getConnection()){
+			String sql = "update techbee.registration set phone_number = ? WHERE id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, phoneNumber);
+			preparedStatement.setInt(2, id);
+			result = preparedStatement.executeUpdate();
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println(e);
+			throw new Exception("User not found with Id " + id);
+		}
+		
+		
+		return result;
 	}
 
+	
 	@Override
-	public Registration updateByPhoneNumber(long phoneNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean deleteByEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+	public int deleteByEmail(String email) throws Exception  {
+		int result = 0;
+		
+		try(Connection connection = PostgresSQLConnection.getConnection()) {
+			String sql = "DELETE FROM techbee.registration WHERE email = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, email);
+			
+			result = preparedStatement.executeUpdate();
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			System.out.println(e);
+			throw new Exception("Error deleting record");
+		}
+		return result;
 	}
 
 }

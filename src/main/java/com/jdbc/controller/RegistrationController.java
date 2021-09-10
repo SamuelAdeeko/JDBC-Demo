@@ -21,12 +21,19 @@ public class RegistrationController {
 //		int number = registrationDAOImpl.saveRegistration(registration);
 //		System.out.println("Result: " + number);
 		
-		List<Registration> allRegistration = new ArrayList<>();
-		allRegistration= registrationDAOImpl.findAllRegistration();
+		// get all registration
+//		List<Registration> allRegistration = new ArrayList<>();
+//		allRegistration= registrationDAOImpl.findAllRegistration();
+//		
+//		for(Registration r: allRegistration) {
+//			System.out.println(r);
+//		}
 		
-		for(Registration r: allRegistration) {
-			System.out.println(r);
-		}
+		// UPDATE phone Number by id
+//		int result = registrationDAOImpl.updatePhoneNumberById(2, 5105630847l);
+//		System.out.println("result: "+ result);
 		
+		int result1 = registrationDAOImpl.deleteByEmail("marty@yahoo.com");
+		System.out.println(result1);
 	}
 }
