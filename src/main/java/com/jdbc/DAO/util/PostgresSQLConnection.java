@@ -14,8 +14,8 @@ public class PostgresSQLConnection {
 		
 		Class.forName("org.postgresql.Driver");
 		String url = "jdbc:postgresql://my8weeksinstance.cjfjnd6bxxdf.us-west-1.rds.amazonaws.com:5432/postgres";
-		String user = "postgres";
-		String password = "koyatina";
+		String user = "";
+		String password = "";
 		
 		connection = DriverManager.getConnection(url, user, password);
 		
